@@ -22,4 +22,18 @@ public class BarVoidTest {
         bar.barWork("qwe");
         verify(foo).foo("qwe");
     }
+
+
+
+    //работа с выбросом екзепшена
+    @Test(expected = Exception.class)
+    public void barWorkWithException(){
+        doThrow(new Exception()).when(foo).foo("abc");
+        doNothing().when(foo).foo(anyString());
+
+        bar.barWork("qwe");
+        verify(foo).foo("qwe");
+
+        bar.barWork("abc");
+    }
 }
